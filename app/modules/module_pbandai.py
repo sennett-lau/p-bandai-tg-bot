@@ -1,10 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-def get_item_availability(item_id):
-    item_url = 'https://p-bandai.com/hk/item/'
 
-    combine_url = item_url + item_id
+def get_item_availability(item_id):
+    combine_url = get_item_url(item_id)
 
     try:
 
@@ -35,4 +34,9 @@ def get_item_availability(item_id):
             'name': '',
             'is_available': False
         }
+    pass
+
+
+def get_item_url(item_id):
+    return 'https://p-bandai.com/hk/item/' + item_id
     pass

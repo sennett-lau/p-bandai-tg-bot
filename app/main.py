@@ -37,6 +37,10 @@ def main():
 
     # Conversation handler
 
+    # Scheduled tasks
+    j = updater.job_queue
+    j.run_repeating(monitor_item_broadcast, interval=10, first=0)
+
     # Error handler
     dp.add_error_handler(error)
 

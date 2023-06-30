@@ -2,6 +2,9 @@ import fnmatch
 
 cache = {}
 
+def all_cache():
+    return cache
+
 def set_cache(key, value):
     cache[key] = value
 

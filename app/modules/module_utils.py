@@ -1,10 +1,12 @@
 import logging
 import sys
 
-sys.path.append('..')
-
 from telegram.ext import ConversationHandler
-from module.hub import *
+
+from .module_mongo import MongoLink
+from .module_cache import set_cache
+
+sys.path.append('..')
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)

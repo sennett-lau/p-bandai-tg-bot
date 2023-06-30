@@ -54,7 +54,7 @@ def unmonitor(update, context):
 
         mongo_link = MongoLink()
 
-        data = mongo_link.get_monitor_item(key_id, item_id)
+        data = get_cache('{}::{}'.format(key_id, item_id))
 
         if data is None:
             # update the processing message to show that the item is not being monitored

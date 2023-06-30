@@ -33,6 +33,9 @@ class MongoLink():
     def upsert_one(self, collection_name, query, data):
         return self.get_collection(collection_name).update_one(query, data, upsert=True)
 
+    def update_many(self, collection_name, query, data):
+        return self.get_collection(collection_name).update_many(query, data)
+
     def delete_one(self, collection_name, query):
         return self.get_collection(collection_name).delete_one(query)
 
@@ -82,3 +85,19 @@ class MongoLink():
         }
 
         return self.update_one('item_monitor', filter, update)
+
+    def mass_deactivate_monitor_items(self, key_ids):
+        # deactivate all items to monitor
+        filter = {
+            'key_id': {
+                '$in': key_ids
+            }
+        }
+
+        update = {
+            '$set': {
+                'monitor': False,
+            }
+        }
+
+        return self.update_many('item_monitor', filter, update)
