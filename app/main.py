@@ -20,6 +20,10 @@ def main():
         print('Product Environment...')
     print('=======================================================')
     """Start the bot."""
+
+    # set up item monitoring
+    set_up_item_monitoring()
+
     updater = Updater(TOKEN, use_context=True, workers=6)
 
     dp = updater.dispatcher

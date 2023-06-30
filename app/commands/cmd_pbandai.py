@@ -29,6 +29,7 @@ def monitor(update, context):
         mongo_link = MongoLink()
 
         mongo_link.add_monitor_item(key_id, item_id)
+        set_cache('{}::{}'.format(key_id, item_id), True)
 
         context.bot.edit_message_text(chat_id=update.message.chat.id, message_id=message.message_id,
                                       text='Product {} added to monitor list.'.format(item_availability['name']))
@@ -62,6 +63,7 @@ def unmonitor(update, context):
             return
 
         mongo_link.deactivate_monitor_item(key_id, item_id)
+        set_cache('{}::{}'.format(key_id, item_id), False)
 
         context.bot.edit_message_text(chat_id=update.message.chat.id, message_id=message.message_id,
                                       text='Item is no longer being monitored.')
