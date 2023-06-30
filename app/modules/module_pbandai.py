@@ -6,25 +6,33 @@ def get_item_availability(item_id):
 
     combine_url = item_url + item_id
 
-    response = requests.get(combine_url)
+    try:
 
-    soup = BeautifulSoup(response.text, 'html.parser')
+        response = requests.get(combine_url)
 
-    # get the h1 with class o-product__name
-    product_name = soup.find('h1', {'class': 'o-product__name'}).text
+        soup = BeautifulSoup(response.text, 'html.parser')
 
-    # get the button with the id addToCartButton
-    button = soup.find('button', {'id': 'addToCartButton'})
+        # get the h1 with class o-product__name
+        product_name = soup.find('h1', {'class': 'o-product__name'}).text
 
-    # check if the button is disabled
-    if button.has_attr('disabled'):
+        # get the button with the id addToCartButton
+        button = soup.find('button', {'id': 'addToCartButton'})
+
+        # check if the button is disabled
+        if button.has_attr('disabled'):
+            return {
+                'name': product_name,
+                'is_available': False
+            }
+
         return {
             'name': product_name,
+            'is_available': True
+        }
+    except Exception as e:
+        print(e)
+        return {
+            'name': '',
             'is_available': False
         }
-
-    return {
-        'name': product_name,
-        'is_available': True
-    }
     pass

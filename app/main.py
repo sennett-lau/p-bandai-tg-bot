@@ -1,8 +1,9 @@
 import os
 
 from dotenv import load_dotenv
-from telegram.ext import Updater, MessageHandler
+from telegram.ext import Updater, CommandHandler
 
+from commands.hub import *
 from modules.hub import *
 
 load_dotenv()
@@ -24,6 +25,9 @@ def main():
     dp = updater.dispatcher
 
     # Command handler
+    dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("monitor", monitor))
+    dp.add_handler(CommandHandler("unmonitor", unmonitor))
 
     # Message handler
 
