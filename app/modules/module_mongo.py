@@ -1,7 +1,7 @@
 import os
 
-from pymongo import MongoClient
 from dotenv import load_dotenv
+from pymongo import MongoClient
 
 load_dotenv()
 
@@ -89,7 +89,7 @@ class MongoLink():
     def mass_deactivate_monitor_items(self, key_ids):
         # deactivate all items to monitor
         filter = {
-            'key_id': {
+            'combined_id': {
                 '$in': key_ids
             }
         }
